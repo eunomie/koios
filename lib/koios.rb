@@ -1,1 +1,1 @@
-require 'koios/document'
+require 'koios/md'
