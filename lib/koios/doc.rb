@@ -4,60 +4,66 @@ module Koios
       instance = self.new
 
       instance.extend_string
-      String.koios_md_content = instance.content
+      String.koios = instance
 
-      instance.instance_eval(&content)
+      instance.content = instance.instance_eval(&content)
 
       instance.unextend_string
 
       instance.to_s
     end
 
-    attr_accessor :content
+    def to_s
+      @content.join("\n") + "\n"
+    end
+
+    def p(*args)
+      "\n" + args.join('')
+    end
 
     def initialize
       @content = []
     end
 
-    def to_s
-      @content.join
-    end
-
     def extend_string
       String.class_eval do
         class << self
-          def koios_md_content=(content)
-            @@koios_md_content = content
+          def koios=(koios)
+            @@koios = koios
           end
         end
 
         def h1
-          @@koios_md_content << h(self.to_s, 1)
+          h(self, 1)
         end
 
         def h2
-          @@koios_md_content << h(self.to_s, 2)
+          h(self, 2)
         end
 
         def h3
-          @@koios_md_content << h(self.to_s, 3)
+          h(self, 3)
         end
 
         def h4
-          @@koios_md_content << h(self.to_s, 4)
+          h(self, 4)
         end
 
         def h5
-          @@koios_md_content << h(self.to_s, 5)
+          h(self, 5)
         end
 
         def h6
-          @@koios_md_content << h(self.to_s, 6)
+          h(self, 6)
+        end
+
+        def break_line
+          self + "  \n"
         end
 
         private
         def h(content, level)
-          "\n#{"#" * level} #{content}\n"
+          "\n#{"#" * level} #{content}"
         end
       end
     end
@@ -65,11 +71,22 @@ module Koios
     def unextend_string
       String.class_eval do
         remove_method :h1
+        remove_method :h2
+        remove_method :h3
+        remove_method :h4
+        remove_method :h5
+        remove_method :h6
+        remove_method :break_line
+
 
         class << self
-          remove_method :koios_md_content=
+          remove_method :koios=
         end
       end
+    end
+
+    def content=(arr)
+      @content = arr
     end
   end
 end
