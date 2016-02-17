@@ -21,6 +21,30 @@ module Koios
       "\n" + args.join('')
     end
 
+    def h1(*args)
+      args.join('').h1
+    end
+
+    def h2(*args)
+      args.join('').h2
+    end
+
+    def h3(*args)
+      args.join('').h3
+    end
+
+    def h4(*args)
+      args.join('').h4
+    end
+
+    def h5(*args)
+      args.join('').h5
+    end
+
+    def h6(*args)
+      args.join('').h6
+    end
+
     def initialize
       @content = []
     end

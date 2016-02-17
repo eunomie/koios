@@ -18,7 +18,7 @@ describe Koios::Doc do
       expect{"plop".h1}.to raise_error
     end
 
-    it 'generate a document with 6 levels of headers' do
+    it 'generate a document with 6 levels of headers using string extension' do
       md = Koios::Doc.write {[
         "header level 1".h1,
         "header level 2".h2,
@@ -26,6 +26,60 @@ describe Koios::Doc do
         "header level 4".h4,
         "header level 5".h5,
         "header level 6".h6
+      ]}
+      exp = <<-EOF
+
+# header level 1
+
+## header level 2
+
+### header level 3
+
+#### header level 4
+
+##### header level 5
+
+###### header level 6
+EOF
+
+      expect(md).to eq exp
+    end
+
+    it 'generate a document with 6 levels of headers' do
+      md = Koios::Doc.write {[
+        h1("header level 1"),
+        h2("header level 2"),
+        h3("header level 3"),
+        h4("header level 4"),
+        h5("header level 5"),
+        h6("header level 6")
+      ]}
+      exp = <<-EOF
+
+# header level 1
+
+## header level 2
+
+### header level 3
+
+#### header level 4
+
+##### header level 5
+
+###### header level 6
+EOF
+
+      expect(md).to eq exp
+    end
+
+    it 'generate joined headers' do
+      md = Koios::Doc.write {[
+        h1("header", " level 1"),
+        h2("header", " level 2"),
+        h3("header", " level", " 3"),
+        h4("header", " level 4"),
+        h5("header", " level ", "5"),
+        h6("header", " level 6")
       ]}
       exp = <<-EOF
 
