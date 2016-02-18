@@ -45,6 +45,11 @@ module Koios
       args.join('').h6
     end
 
+    def a(url, content = nil)
+      c = content || url
+      url.link_to c
+    end
+
     def initialize
       @content = []
     end
@@ -85,6 +90,11 @@ module Koios
           self + "  \n"
         end
 
+        def link_to(content = nil)
+          c = content || self
+          "[#{c}](#{self})"
+        end
+
         private
         def h(content, level)
           "\n#{"#" * level} #{content}"
@@ -101,7 +111,7 @@ module Koios
         remove_method :h5
         remove_method :h6
         remove_method :break_line
-
+        remove_method :link_to
 
         class << self
           remove_method :koios=

@@ -164,5 +164,43 @@ EOF
 EOF
       expect(md).to eq exp
     end
+
+    it 'expands link with only the url from string' do
+      url = "http://github.com/eunomie"
+      md = Koios::Doc.write {[
+        url.link_to
+      ]}
+      exp = "[#{url}](#{url})\n"
+      expect(md).to eq exp
+    end
+
+    it 'expands link with only the url' do
+      url = "http://github.com/eunomie"
+      md = Koios::Doc.write {[
+        a(url)
+      ]}
+      exp = "[#{url}](#{url})\n"
+      expect(md).to eq exp
+    end
+
+    it 'expands link from string' do
+      url = "http://github.com/eunomie"
+      txt = "github"
+      md = Koios::Doc.write {[
+        url.link_to(txt)
+      ]}
+      exp = "[#{txt}](#{url})\n"
+      expect(md).to eq exp
+    end
+
+    it 'expands link' do
+      url = "http://github.com/eunomie"
+      txt = "github"
+      md = Koios::Doc.write {[
+        a(url, txt)
+      ]}
+      exp = "[#{txt}](#{url})\n"
+      expect(md).to eq exp
+    end
   end
 end
