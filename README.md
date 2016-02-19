@@ -37,6 +37,6 @@ Please see [LICENSE][].
 AUTHOR
 ------
 
-Yves Brissaud, [@\_crev_](https://twiter.com/_crev_), [@eunomie](https://github.com/eunomie)
+Yves Brissaud, [@\_crev_](https://twitter.com/_crev_), [@eunomie](https://github.com/eunomie)
 
 [LICENSE]: https://github.com/eunomie/koios/blob/master/LICENSE
