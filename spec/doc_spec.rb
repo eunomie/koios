@@ -244,5 +244,16 @@ EOF
       exp = "![#{alt}](#{img})\n"
       expect(md).to eq exp
     end
+
+    it 'allows to mix link and img' do
+      url = 'https://travis-ci.org/eunomie/koios'
+      image = 'https://travis-ci.org/eunomie/koios.svg?branch=master'
+      alt = 'Build status'
+      md = Koios::Doc.write {
+        [url.link_to(image.img(alt))]
+      }
+      exp = "[![#{alt}](#{image})](#{url})\n"
+      expect(md).to eq exp
+    end
   end
 end
