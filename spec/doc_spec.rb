@@ -202,5 +202,47 @@ EOF
       exp = "[#{txt}](#{url})\n"
       expect(md).to eq exp
     end
+
+    it 'expands img from string' do
+      img = 'https://travis-ci.org/eunomie/koios.svg?branch=master'
+      md = Koios::Doc.write {
+        [
+         img.img
+        ]}
+      exp = "![](#{img})\n"
+      expect(md).to eq exp
+    end
+
+    it 'expands img from string with alt' do
+      img = 'https://travis-ci.org/eunomie/koios.svg?branch=master'
+      alt = 'koios'
+      md = Koios::Doc.write {
+        [
+         img.img(alt)
+        ]}
+      exp = "![#{alt}](#{img})\n"
+      expect(md).to eq exp
+    end
+
+    it 'expands img' do
+      img = 'https://travis-ci.org/eunomie/koios.svg?branch=master'
+      md = Koios::Doc.write {
+        [
+         img(img)
+        ]}
+      exp = "![](#{img})\n"
+      expect(md).to eq exp
+    end
+
+    it 'expands img with alt' do
+      img = 'https://travis-ci.org/eunomie/koios.svg?branch=master'
+      alt = 'koios'
+      md = Koios::Doc.write {
+        [
+         img(img, alt)
+        ]}
+      exp = "![#{alt}](#{img})\n"
+      expect(md).to eq exp
+    end
   end
 end

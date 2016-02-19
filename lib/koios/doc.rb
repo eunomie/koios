@@ -50,6 +50,10 @@ module Koios
       url.link_to c
     end
 
+    def img(url, alt = nil)
+      url.img alt
+    end
+
     def initialize
       @content = []
     end
@@ -95,6 +99,11 @@ module Koios
           "[#{c}](#{self})"
         end
 
+        def img(alt = nil)
+          label = alt || ""
+          "![#{label}](#{self})"
+        end
+
         private
         def h(content, level)
           "\n#{"#" * level} #{content}"
@@ -112,6 +121,7 @@ module Koios
         remove_method :h6
         remove_method :break_line
         remove_method :link_to
+        remove_method :img
 
         class << self
           remove_method :koios=
