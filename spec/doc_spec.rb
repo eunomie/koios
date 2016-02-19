@@ -1,6 +1,21 @@
 require 'koios'
 
 describe Koios::Doc do
+  context '#to_s' do
+    it 'join all elements and add a new line' do
+      lines = [
+               'line 1',
+               'line 2',
+               'line 3'
+              ]
+      md = Koios::Doc.write {
+        lines
+      }
+      exp = lines.join("\n") + "\n"
+      expect(md).to eq exp
+    end
+  end
+
   context '##write' do
     it 'extends String inside' do
       header_content = "header"
