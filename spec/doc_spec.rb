@@ -26,11 +26,67 @@ describe Koios::Doc do
       expect(str).to eq md_header
     end
 
-    it 'does not extend String outside' do
+    it 'does not extend String outside - h1' do
       Koios::Doc.write {[
         "plop".h1
       ]}
       expect{"plop".h1}.to raise_error
+    end
+
+    it 'does not extend String outside - h2' do
+      Koios::Doc.write {[
+        "plop".h2
+      ]}
+      expect{"plop".h2}.to raise_error
+    end
+
+    it 'does not extend String outside - h3' do
+      Koios::Doc.write {[
+        "plop".h3
+      ]}
+      expect{"plop".h3}.to raise_error
+    end
+
+    it 'does not extend String outside - h4' do
+      Koios::Doc.write {[
+        "plop".h4
+      ]}
+      expect{"plop".h4}.to raise_error
+    end
+
+    it 'does not extend String outside - h5' do
+      Koios::Doc.write {[
+        "plop".h5
+      ]}
+      expect{"plop".h5}.to raise_error
+    end
+
+    it 'does not extend String outside - h6' do
+      Koios::Doc.write {[
+        "plop".h6
+      ]}
+      expect{"plop".h6}.to raise_error
+    end
+
+    it 'does not extend String outside - break line' do
+      Koios::Doc.write {[
+        "plop".break_line
+      ]}
+      expect{"plop".break_line}.to raise_error
+    end
+
+    it 'does not extend String outside - link_to' do
+      Koios::Doc.write {[
+        "plop".link_to
+      ]}
+      expect{"plop".link_to}.to raise_error
+    end
+
+    it 'does not extend String outside - img' do
+      Koios::Doc.write {[
+        "plop".img
+      ]}
+      expect{"plop".img}.to raise_error
     end
 
     it 'generate a document with 6 levels of headers using string extension' do
