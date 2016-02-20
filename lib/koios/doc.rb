@@ -104,6 +104,22 @@ module Koios
           "![#{label}](#{self})"
         end
 
+        def italic
+          "_#{self}_"
+        end
+
+        def bold
+          "**#{self}**"
+        end
+
+        def strikethrough
+          "~~#{self}~~"
+        end
+
+        def code
+          "`#{self}`"
+        end
+
         private
         def h(content, level)
           "\n#{"#" * level} #{content}"
@@ -122,6 +138,10 @@ module Koios
         remove_method :break_line
         remove_method :link_to
         remove_method :img
+        remove_method :italic
+        remove_method :bold
+        remove_method :strikethrough
+        remove_method :code
 
         class << self
           remove_method :koios=

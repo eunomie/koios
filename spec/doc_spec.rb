@@ -89,6 +89,20 @@ describe Koios::Doc do
       expect{"plop".img}.to raise_error
     end
 
+    it 'does not extend String outside - italic' do
+      Koios::Doc.write {[
+        "plop".italic
+      ]}
+      expect{"plop".italic}.to raise_error
+    end
+
+    it 'does not extend String outside - bold' do
+      Koios::Doc.write {[
+        "plop".bold
+      ]}
+      expect{"plop".bold}.to raise_error
+    end
+
     it 'generate a document with 6 levels of headers using string extension' do
       md = Koios::Doc.write {[
         "header level 1".h1,
@@ -327,6 +341,42 @@ EOF
       expect(md).to eq exp
     end
 
+    it 'allows to write italic' do
+      content = "plop"
+      md = Koios::Doc.write {
+        [content.italic]
+      }
+      exp = "_#{content}_\n"
+      expect(md).to eq exp
+    end
+
+    it 'allows to write bold' do
+      content = "plop"
+      md = Koios::Doc.write {
+        [content.bold]
+      }
+      exp = "**#{content}**\n"
+      expect(md).to eq exp
+    end
+
+    it 'allows to write strikethrough' do
+      content = "plop"
+      md = Koios::Doc.write {
+        [content.strikethrough]
+      }
+      exp = "~~#{content}~~\n"
+      expect(md).to eq exp
+    end
+
+    it 'allows to write inline code' do
+      content = "plop"
+      md = Koios::Doc.write {
+        [content.code]
+      }
+      exp = "`#{content}`\n"
+      expect(md).to eq exp
+    end
+
     it 'handle a full markdown file' do
       exp = <<EOF
 
@@ -379,13 +429,13 @@ EOF
          "Contributing".h2,
          p("1. ", "https://github.com/eunomie/koios/fork".link_to("Fork it"),
            "\n",
-           "2. Create your feature branch (`git checkout -b my-new-feature`)",
+           "2. Create your feature branch (", "git checkout -b my-new-feature".code, ")",
            "\n",
-           "3. Commit your changes, with tests (`git commit -am 'Add some feature'`)",
+           "3. Commit your changes, with tests (", "git commit -am 'Add some feature'".code, ")",
            "\n",
-           "4. Push to the branch (`git push origin my-new-feature`)",
+           "4. Push to the branch (", "git push origin my-new-feature".code, ")",
            "\n",
-           "5. Create a new _Pull Request_"),
+           "5. Create a new ", "Pull Request".italic),
          "LICENSE".h2,
          p("Please see ", "https://github.com/eunomie/koios/blob/master/LICENSE".link_to("LICENSE"), "."),
          "AUTHOR".h2,
