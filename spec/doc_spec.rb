@@ -377,6 +377,37 @@ EOF
       expect(md).to eq exp
     end
 
+    it 'allows to write code block' do
+      md = Koios::Doc.write {
+        [code("gem install bundler",
+              "bundle install koios")]
+      }
+      exp = <<EOF
+
+```
+gem install bundler
+bundle install koios
+```
+EOF
+      expect(md).to eq exp
+    end
+
+    it 'allows to write code block for a defined language' do
+      md = Koios::Doc.write {
+        [code_for("sh",
+                  "gem install bundler",
+                  "bundle install koios")]
+      }
+      exp = <<EOF
+
+```sh
+gem install bundler
+bundle install koios
+```
+EOF
+      expect(md).to eq exp
+    end
+
     it 'handle a full markdown file' do
       exp = <<EOF
 
@@ -424,7 +455,7 @@ EOF
          "Prerequisites".h3,
          p("- Ruby >= 2.2"),
          "Setup".h3,
-         p("```\n", "gem install koios", "\n```"),
+         code("gem install koios"),
          "Usage".h2,
          "Contributing".h2,
          p("1. ", "https://github.com/eunomie/koios/fork".link_to("Fork it"),

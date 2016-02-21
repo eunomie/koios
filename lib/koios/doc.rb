@@ -54,6 +54,14 @@ module Koios
       url.img alt
     end
 
+    def code(*args)
+      "\n```\n" + args.join("\n") + "\n```"
+    end
+
+    def code_for(lang, *args)
+      "\n```#{lang}\n" + args.join("\n") + "\n```"
+    end
+
     def initialize
       @content = []
     end
