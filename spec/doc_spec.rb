@@ -1,5 +1,7 @@
 require 'koios'
 
+RSpec::Expectations.configuration.warn_about_potential_false_positives = false
+
 describe Koios::Doc do
   context '#to_s' do
     it 'join all elements and add a new line' do
