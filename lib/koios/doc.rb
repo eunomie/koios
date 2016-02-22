@@ -62,6 +62,16 @@ module Koios
       "\n```#{lang}\n" + args.join("\n") + "\n```"
     end
 
+    def ul(items)
+      list = items.map { |item| "- #{item}" }.join("\n")
+      "\n#{list}"
+    end
+
+    def ol(items)
+      list = items.map.with_index { |item, i| "#{i + 1}. #{item}" }.join("\n")
+      "\n#{list}"
+    end
+
     def initialize
       @content = []
     end

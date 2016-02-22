@@ -408,6 +408,32 @@ EOF
       expect(md).to eq exp
     end
 
+    it 'allow to write unordered list' do
+      md = Koios::Doc.write {
+        [ul(["First line",
+             "Second line"])]
+      }
+      exp = <<EOF
+
+- First line
+- Second line
+EOF
+      expect(md).to eq exp
+    end
+
+    it 'allow to write ordered list' do
+      md = Koios::Doc.write {
+        [ol(["First line",
+             "Second line"])]
+      }
+      exp = <<EOF
+
+1. First line
+2. Second line
+EOF
+      expect(md).to eq exp
+    end
+
     it 'handle a full markdown file' do
       exp = <<EOF
 
@@ -453,20 +479,16 @@ EOF
            "https://badge.fury.io/rb/koios".link_to("https://badge.fury.io/rb/koios.svg".img("Gem Version"))),
          "Installation".h2,
          "Prerequisites".h3,
-         p("- Ruby >= 2.2"),
+         ul(["Ruby >= 2.2"]),
          "Setup".h3,
          code("gem install koios"),
          "Usage".h2,
          "Contributing".h2,
-         p("1. ", "https://github.com/eunomie/koios/fork".link_to("Fork it"),
-           "\n",
-           "2. Create your feature branch (", "git checkout -b my-new-feature".code, ")",
-           "\n",
-           "3. Commit your changes, with tests (", "git commit -am 'Add some feature'".code, ")",
-           "\n",
-           "4. Push to the branch (", "git push origin my-new-feature".code, ")",
-           "\n",
-           "5. Create a new ", "Pull Request".italic),
+         ol(["https://github.com/eunomie/koios/fork".link_to("Fork it"),
+             "Create your feature branch (" + "git checkout -b my-new-feature".code + ")",
+             "Commit your changes, with tests (" + "git commit -am 'Add some feature'".code + ")",
+             "Push to the branch (" + "git push origin my-new-feature".code + ")",
+             "Create a new " + "Pull Request".italic]),
          "LICENSE".h2,
          p("Please see ", "https://github.com/eunomie/koios/blob/master/LICENSE".link_to("LICENSE"), "."),
          "AUTHOR".h2,
