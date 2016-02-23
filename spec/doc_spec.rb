@@ -105,6 +105,21 @@ describe Koios::Doc do
       expect{"plop".bold}.to raise_error
     end
 
+    it 'does not extend String outside - strikethrough' do
+      Koios::Doc.write {[
+        "plop".strikethrough
+      ]}
+      expect{"plop".strikrthrough}.to raise_error
+    end
+
+    it 'does not extend String outside - code' do
+      Koios::Doc.write {[
+        "plop".code
+      ]}
+      expect{"plop".code}.to raise_error
+    end
+
+
     it 'generate a document with 6 levels of headers using string extension' do
       md = Koios::Doc.write {[
         "header level 1".h1,
