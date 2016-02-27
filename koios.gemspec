@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'koios'
-  s.version = '0.0.1'
-  s.date = '2016-02-02'
+  s.version = '0.1.0'
+  s.date = '2016-02-27'
   s.summary = 'Markdown writer'
   s.description = 'A little helper to write markdown in ruby.'
   s.authors = ['Yves Brissaud']
