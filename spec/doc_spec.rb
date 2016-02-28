@@ -119,6 +119,13 @@ describe Koios::Doc do
       expect{"plop".code}.to raise_error
     end
 
+    it 'does not extend String outside - pre' do
+      Koios::Doc.write {[
+        "plop".pre
+      ]}
+      expect{"plop".pre}.to raise_error
+    end
+
 
     it 'generate a document with 6 levels of headers using string extension' do
       md = Koios::Doc.write {[
@@ -447,6 +454,29 @@ EOF
 
 1. First line
 2. Second line
+EOF
+      expect(md).to eq exp
+    end
+
+    it 'allow to write preformated block' do
+      md = Koios::Doc.write {
+        [pre(["first line",
+              "second line"])]
+      }
+      exp = <<EOF
+    first line
+    second line
+EOF
+      expect(md).to eq exp
+    end
+
+    it 'allow to write preformated block from string' do
+      md = Koios::Doc.write {
+        ["first line\nsecond line".pre]
+      }
+      exp = <<EOF
+    first line
+    second line
 EOF
       expect(md).to eq exp
     end

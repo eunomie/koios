@@ -72,6 +72,10 @@ module Koios
       "\n#{list}"
     end
 
+    def pre(*args)
+      args.join("\n").pre
+    end
+
     def initialize
       @content = []
     end
@@ -138,6 +142,10 @@ module Koios
           "`#{self}`"
         end
 
+        def pre
+          self.split("\n").map { |l| "    #{l}" }.join("\n")
+        end
+
         private
         def h(content, level)
           "\n#{"#" * level} #{content}"
@@ -160,6 +168,7 @@ module Koios
         remove_method :bold
         remove_method :strikethrough
         remove_method :code
+        remove_method :pre
 
         class << self
           remove_method :koios=
