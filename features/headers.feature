@@ -12,7 +12,7 @@ Feature: Markdown headers
       ## H2
 
   Scenario: Headers functions
-    Given the following koios code:
+    When I execute the following koios code:
       """
       Koios::Doc.write {[
         h1('H1'),
@@ -23,7 +23,6 @@ Feature: Markdown headers
         h6('H6')
       ]}
       """
-    When I execute the koios code
     Then the markdown output is:
       """
 
@@ -42,13 +41,12 @@ Feature: Markdown headers
       """
 
   Scenario: Headers join strings
-    Given the following koios code:
+    When I execute the following koios code:
       """
       Koios::Doc.write {[
         h3('This', ' is', ' a', ' h3', ' header')
       ]}
       """
-    When I execute the koios code
     Then the markdown output is:
       """
 

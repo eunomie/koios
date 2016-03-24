@@ -1,9 +1,5 @@
-Given(/^the following koios code:$/) do |ruby|
-  @ruby = ruby
-end
-
-When(/^I execute the koios code$/) do
-  @md = eval @ruby
+When(/^I execute the following koios code:$/) do |ruby|
+  @md = eval ruby
 end
 
 Then(/^the markdown output is:$/) do |expected_markdown|
