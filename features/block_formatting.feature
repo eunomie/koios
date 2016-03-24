@@ -5,7 +5,7 @@ Feature: Block formatting
   - code block (with or without mention of language)
   - preformated block
 
-  Scenario: Code block: without language
+  Scenario: A code block can be defined without a language
     When I execute the following koios code:
       """
       Koios::Doc.write {[
@@ -21,7 +21,7 @@ Feature: Block formatting
 
       """
 
-  Scenario: Code block: each argument is a new line
+  Scenario: In a code block, each argument is a new line
     When I execute the following koios code:
       """
       Koios::Doc.write {[
@@ -39,7 +39,7 @@ Feature: Block formatting
 
       """
 
-  Scenario: A code block can describe the language of the code
+  Scenario: The language of a code block can be describe using `code_for`
     When I execute the following koios code:
       """
       Koios::Doc.write {[
@@ -58,7 +58,7 @@ Feature: Block formatting
 
       """
 
-  Scenario: Preformatted text, string extension
+  Scenario: A string can be converted in a preformatted block
     When I execute the following koios code:
       """
       Koios::Doc.write {[
@@ -71,7 +71,7 @@ Feature: Block formatting
 
       """
 
-  Scenario: Preformatted text, each argument is a line
+  Scenario: In a preformatted block, each argument is a new line
     When I execute the following koios code:
       """
       Koios::Doc.write {[
