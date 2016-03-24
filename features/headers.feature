@@ -51,3 +51,32 @@ Feature: Markdown headers
       ### This is a h3 header
 
       """
+
+  Scenario: String extensions
+    When I execute the following koios code:
+      """
+      Koios::Doc.write {[
+        'H1'.h1,
+        'H2'.h2,
+        'H3'.h3,
+        'H4'.h4,
+        'H5'.h5,
+        'H6'.h6
+      ]}
+      """
+    Then the markdown output is:
+      """
+
+      # H1
+
+      ## H2
+
+      ### H3
+
+      #### H4
+
+      ##### H5
+
+      ###### H6
+
+      """
