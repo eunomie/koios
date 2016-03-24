@@ -6,10 +6,8 @@ Feature: Markdown headers
   You can write header in two way, by calling a header function or using
   `String` extension.
 
-  Headers are written using _classical_ style like:
-
-      # H1
-      ## H2
+  Headers are written using _classical_ style like `# H1` or `### H3`
+  instead of underlined versions.
 
   Scenario: Headers functions
     When I execute the following koios code:
