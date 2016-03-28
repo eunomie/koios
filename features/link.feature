@@ -62,3 +62,16 @@ Feature: Link
 
       """
 
+  Scenario: Link with an image as content (see Image feature for details)
+    When I execute the following koios code:
+      """
+      Koios::Doc.write{[
+        'https://travis-ci.org/eunomie.koios'.link_to(
+          'https://travis-ci.org/eunomie/koios.svg?branch=master'.img('Build Status'))
+      ]}
+      """
+    Then the markdown output is:
+      """
+      [![Build Status](https://travis-ci.org/eunomie/koios.svg?branch=master)](https://travis-ci.org/eunomie.koios)
+
+      """
