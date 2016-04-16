@@ -63,7 +63,13 @@ module Koios
     end
 
     def ul(items)
-      list = items.map { |item| "- #{item}" }.join("\n")
+      list = items.map do |item|
+        if is_a_generated_ul(item)
+          item.lines[1..-1].map { |line| "  #{line.chomp}"}.join("\n")
+        else
+          "- #{item}"
+        end
+      end.join("\n")
       "\n#{list}"
     end
 
@@ -178,6 +184,14 @@ module Koios
 
     def content=(arr)
       @content = arr
+    end
+
+    private
+
+    def is_a_generated_ul(item)
+      item.include?("\n") &&
+        item.start_with?("\n") &&
+        item.lines[1..-1].all? { |line| line.start_with? '-'}
     end
   end
 end

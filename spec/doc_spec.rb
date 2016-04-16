@@ -1,5 +1,6 @@
 require 'koios'
 
+
 RSpec::Expectations.configuration.warn_about_potential_false_positives = false
 
 describe Koios::Doc do
@@ -441,6 +442,23 @@ EOF
 
 - First line
 - Second line
+EOF
+      expect(md).to eq exp
+    end
+
+    it 'allow to write nested list' do
+      md = Koios::Doc.write {
+        [ul(["First line",
+             "Second line",
+             ul(["First nested",
+                 "Second nested"])])]
+      }
+      exp = <<EOF
+
+- First line
+- Second line
+  - First nested
+  - Second nested
 EOF
       expect(md).to eq exp
     end
