@@ -484,6 +484,31 @@ EOF
       expect(md).to eq exp
     end
 
+    it 'allow to write nested ordered list' do
+      md = Koios::Doc.write {
+        [ol(["First line",
+             "Second line",
+             ol(["First nested",
+                 "Second nested"]),
+             "Return to first ol",
+             ol(["With nested",
+                 ol(["And nested...",
+                     "... in nested"])])])]
+      }
+      exp = <<EOF
+
+1. First line
+2. Second line
+  1. First nested
+  2. Second nested
+3. Return to first ol
+  1. With nested
+    1. And nested...
+    2. ... in nested
+EOF
+      expect(md).to eq exp
+    end
+
     it 'allow to write preformated block' do
       md = Koios::Doc.write {
         [pre(["first line",
