@@ -191,7 +191,7 @@ module Koios
     def is_a_generated_ul(item)
       item.include?("\n") &&
         item.start_with?("\n") &&
-        item.lines[1..-1].all? { |line| line.start_with? '-'}
+        item.lines[1..-1].all? { |line| !line.match(/^(  )*-/).nil? }
     end
   end
 end

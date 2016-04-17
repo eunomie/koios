@@ -451,7 +451,11 @@ EOF
         [ul(["First line",
              "Second line",
              ul(["First nested",
-                 "Second nested"])])]
+                 "Second nested"]),
+             "Return to first ul",
+             ul(["With nested",
+                 ul(["And nested...",
+                     "... in nested"])])])]
       }
       exp = <<EOF
 
@@ -459,6 +463,10 @@ EOF
 - Second line
   - First nested
   - Second nested
+- Return to first ul
+  - With nested
+    - And nested...
+    - ... in nested
 EOF
       expect(md).to eq exp
     end
