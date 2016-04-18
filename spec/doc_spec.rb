@@ -471,6 +471,31 @@ EOF
       expect(md).to eq exp
     end
 
+    it 'allow to nest what you want in a list' do
+      md = Koios::Doc.write {
+        [ul(["First line",
+             "Second line",
+             pre("First pre line",
+                 "Second pre line"),
+             p("And a paragraph"),
+             code("And some code")])]
+      }
+      exp = <<EOF
+
+- First line
+- Second line
+
+      First pre line
+      Second pre line
+
+  And a paragraph
+
+  ```
+  And some code
+  ```
+EOF
+    end
+
     it 'allow to write ordered list' do
       md = Koios::Doc.write {
         [ol(["First line",
@@ -507,6 +532,31 @@ EOF
     2. ... in nested
 EOF
       expect(md).to eq exp
+    end
+
+    it 'allow to nest what you want in an ordered list' do
+      md = Koios::Doc.write {
+        [ol(["First line",
+             "Second line",
+             pre("First pre line",
+                 "Second pre line"),
+             p("And a paragraph"),
+             code("And some code")])]
+      }
+      exp = <<EOF
+
+1. First line
+2. Second line
+
+      First pre line
+      Second pre line
+
+  And a paragraph
+
+  ```
+  And some code
+  ```
+EOF
     end
 
     it 'allow to write preformated block' do

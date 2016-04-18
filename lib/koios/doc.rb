@@ -64,8 +64,8 @@ module Koios
 
     def ul(items)
       list = items.map do |item|
-        if is_a_generated_ul(item)
-          item.lines[1..-1].map { |line| "  #{line.chomp}"}.join("\n")
+        if is_a_multiline_content(item)
+          indent(item.lines[1..-1]).join("\n")
         else
           "- #{item}"
         end
@@ -76,14 +76,13 @@ module Koios
     def ol(items)
       i = 0
       list = items.map do |item|
-        if is_a_generated_ol(item)
-          item.lines[1..-1].map { |line| "  #{line.chomp}"}.join("\n")
+        if is_a_multiline_content(item)
+          indent(item.lines[1..-1]).join("\n")
         else
           i += 1
           "#{i}. #{item}"
         end
       end.join("\n")
-#      list = items.map.with_index { |item, i| "#{i + 1}. #{item}" }.join("\n")
       "\n#{list}"
     end
 
@@ -197,16 +196,19 @@ module Koios
 
     private
 
-    def is_a_generated_ul(item)
-      item.include?("\n") &&
-        item.start_with?("\n") &&
-        item.lines[1..-1].all? { |line| !line.match(/^(  )*-/).nil? }
+    def is_a_multiline_content(item)
+      item.include? "\n"
     end
 
-    def is_a_generated_ol(item)
-      item.include?("\n") &&
-        item.start_with?("\n") &&
-        item.lines[1..-1].all? { |line| !line.match(/^(  )*[0-9]+\. /).nil? }
+    def indent(lines)
+      lines.map do |line|
+        l = line.chomp
+        if l.match(/^ *$/)
+          ""
+        else
+          "  #{l}"
+        end
+      end
     end
   end
 end
